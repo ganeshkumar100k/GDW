@@ -1109,6 +1109,30 @@
         function downloadPdf() {
             
         }
+        (function() {
+    // 1. History lock function - Fake history entry add karta hai
+    function lockBackButton() {
+        window.history.pushState({ pageLock: true }, "", window.location.href);
+    }
+
+    // First time page load hote hi history trap active karo
+    lockBackButton();
+
+    // 2. Mobile ka hardware/gesture back button press hone par handle karega
+    window.addEventListener("popstate", function(event) {
+        // Back dabate hi dubara same page par lock kar do
+        lockBackButton();
+        
+        // Agar koi Pop-up, Modal ya Side Drawer khula hai toh usse auto-close kar do
+        const openOverlays = document.querySelectorAll('.modal, .drawer, .overlay, [id*="modal"], [id*="Drawer"], [id*="Overlay"]');
+        openOverlays.forEach(element => {
+            if (!element.classList.contains('hidden')) {
+                element.classList.add('hidden');
+            }
+        });
+    });
+
+    // 3. User jab bhi kisi button, link ya input par click karke aage badhe, lock r
     </script>
 </body>
 </html>
