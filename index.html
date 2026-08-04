@@ -963,11 +963,11 @@
 
         // Service Charges Configuration Map
         const serviceFeeConfig = {
-            'Caste Certificate': { govt: 0, service: 50 },
-            'Residence Certificate': { govt: 0, service: 50 },
-            'Income Certificate': { govt: 0, service: 50 },
-            'Voter ID Card': { govt: 0, service: 60 },
-            'PAN Card': { govt: 107, service: 50 },
+            'Caste Certificate': { govt: 0, service: 30 },
+            'Residence Certificate': { govt: 0, service: 30 },
+            'Income Certificate': { govt: 0, service: 30 },
+            'Voter ID Card': { govt: 0, service: 200 },
+            'PAN Card': { govt: 107, service: 200 },
             'Post Matric Scholarship': { govt: 0, service: 100 },
             'NSP Scholarship': { govt: 0, service: 100 },
             'OFSS 11th Admission': { govt: 350, service: 50 },
@@ -1010,7 +1010,7 @@
             document.getElementById('qrAmountLabel').innerText = 'Amount: ₹' + totalFee;
 
             // Dynamic QR code with total amount
-            const upiId = "9876543210@paytm";
+            const upiId = "gk4574720@oksbi";
             const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=${upiId}%26pn=GaneshDigitalWorld%26am=${totalFee}%26cu=INR`;
             document.getElementById('qrCodeImg').src = qrUrl;
 
