@@ -34,46 +34,46 @@ const POSTS_DATA = {
 
 const servicePricing = {
     residence: {
-        govt: 0, process: 20, service: 40, total: 60,
+        govt: 0, service: 30, total: 30,
         title: "Residence Certificate / निवास प्रमाण पत्र",
         docLabel: "Land Receipt / Old Residence Cert (रसीद या पुराना निवास)",
-        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D60%26cu%3DINR&size=200&format=png"
+        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D30%26cu%3DINR&size=200&format=png"
     },
     caste: {
         govt: 0, service: 30, total: 30,
         title: "Caste Certificate / जाति प्रमाण पत्र",
         docLabel: "Khatian / Land Receipt / Old Caste Cert (खतियान या रसीद)",
-        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D60%26cu%3DINR&size=200&format=png"
+        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D30%26cu%3DINR&size=200&format=png"
     },
     income: {
         govt: 0, service: 30, total: 30,
         title: "Income Certificate / आय प्रमाण पत्र",
         docLabel: "Salary Slip / Land Receipt / Declaration (आय शपथ पत्र)",
-        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D60%26cu%3DINR&size=200&format=png"
+        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D30%26cu%3DINR&size=200&format=png"
     },
     pan: {
         govt: 107, service: 97, total: 200,
         title: "New PAN Card / Correction (पैन कार्ड)",
         docLabel: "DOB Proof / 10th Marksheet (जन्म प्रमाण पत्र या मार्कशीट)",
-        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D177%26cu%3DINR&size=200&format=png"
+        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D200%26cu%3DINR&size=200&format=png"
     },
     voter: {
         govt: 0, service: 200, total: 200,
         title: "Voter ID Card / मतदाता पहचान पत्र (Form 6/8)",
         docLabel: "Address Proof / Electricity Bill / Passbook (बिजली बिल या पासबुक)",
-        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D60%26cu%3DINR&size=200&format=png"
+        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D200%26cu%3DINR&size=200&format=png"
     },
     aadhaar: {
         govt: 0, service: 200, total: 200,
         title: "Aadhaar Services / आधार सुधार व प्रिंट",
         docLabel: "Address Proof / Supporting Document (सहायक दस्तावेज)",
-        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D50%26cu%3DINR&size=200&format=png"
+        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D200%26cu%3DINR&size=200&format=png"
     },
     ayushman: {
         govt: 0, service: 60, total: 60,
         title: "Ayushman / E-Shram Card / आयुष्मान कार्ड",
         docLabel: "Ration Card / PM Letter (राशन कार्ड या पत्र)",
-        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D50%26cu%3DINR&size=200&format=png"
+        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D60%26cu%3DINR&size=200&format=png"
     },
     scholarship: {
         govt: 0, service: 100, total: 100,
@@ -85,10 +85,10 @@ const servicePricing = {
         govt: 100, service: 60, total: 160,
         title: "Sarkari Job / Admit Card Form",
         docLabel: "Qualification Marksheet / Certificate (योग्यता प्रमाण पत्र)",
-        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D180%26cu%3DINR&size=200&format=png"
+        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D160%26cu%3DINR&size=200&format=png"
     },
     other_cert: {
-        govt: 0, process: 20, service: 40, total: 60,
+        govt: 0, service: 60, total: 60,
         title: "Other Digital Service / अन्य डिजिटल सेवा",
         docLabel: "Relevant Supporting Document (संबंधित दस्तावेज)",
         qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D60%26cu%3DINR&size=200&format=png"
