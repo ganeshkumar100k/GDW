@@ -10,7 +10,7 @@ const POSTS_DATA = {
         "⚡ SSC GD, Railway Recruitment & Police Online Forms Open",
         "🎓 Bihar Post-Matric & NSP Scholarship Forms Filling Available Here!",
         "📞 For Any Query Call / WhatsApp: 8252880028.",
-        "📞 Share this website."
+        "📲 Share this website."
     ],
     results: [
         { id: "job", title: "Bihar Board 10th / 12th Result", tag: "NEW", tagClass: "bg-red-100 text-red-600", customTitle: "Bihar Board 10th/12th Result Check" },
