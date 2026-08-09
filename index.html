@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,9 +53,15 @@
         }
     </style>
 </head>
-<body class="bg-slate-100 font-sans text-slate-800 min-h-screen flex flex-col">
+<body class="bg-slate-100 font-sans text-slate-800 min-h-screen flex flex-col relative">
 
-    <!-- Top Announcement & Contact Bar -->
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[100] hidden flex flex-col items-center justify-center text-white p-4">
+        <div class="w-16 h-16 border-4 border-amber-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <h3 class="text-lg font-bold">Uploading & Submitting Application...</h3>
+        <p class="text-xs text-slate-300 mt-1">Please wait while your details & documents are being processed.</p>
+    </div>
+
     <div class="bg-darkNavy text-white text-xs md:text-sm py-2 px-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
             <div class="flex items-center space-x-4">
@@ -71,7 +78,6 @@
         </div>
     </div>
 
-    <!-- Main Header / Brand Navigation with Official GDW Logo -->
     <header class="bg-white shadow-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -112,17 +118,15 @@
         </div>
     </header>
 
-    <!-- Running Alerts Marquee -->
     <div class="bg-amber-500 text-slate-900 font-semibold text-xs md:text-sm py-2 px-2 flex items-center shadow-inner">
         <span class="bg-red-700 text-white px-3 py-1 rounded font-bold uppercase text-[10px] tracking-wider mr-2 shrink-0">LATEST NOTICE</span>
         <div class="marquee w-full">
-            <div class="marquee-content">
-                🔥 Bihar RTPS Residence, Caste & Income Certificate Online Apply Active! | ⚡ SSC GD, Railway Recruitment & Police Online Forms Open | 🎓 Bihar Post-Matric & NSP Scholarship Forms Filling Available Here! For Any Query Call / WhatsApp: 8252880028.
+            <div id="marqueeNoticeContainer" class="marquee-content">
+                <!-- Dynamically Rendered via POSTS_DATA -->
             </div>
         </div>
     </div>
 
-    <!-- Hero Banner Section -->
     <section class="bg-gradient-to-r from-primary to-secondary text-white py-8 px-4">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="max-w-2xl text-center md:text-left">
@@ -160,7 +164,6 @@
         </div>
     </section>
 
-    <!-- Main Content Container -->
     <main class="max-w-7xl mx-auto px-4 py-8 flex-grow space-y-10">
 
         <!-- 3 MAIN ACTION GRID (Result | Admit Card | Latest Jobs) -->
@@ -177,23 +180,8 @@
                     <div class="bg-red-600 text-white p-3 font-bold text-center text-lg flex items-center justify-center">
                         <i class="fa-solid fa-square-poll-vertical mr-2"></i> RESULT
                     </div>
-                    <ul class="divide-y divide-slate-100 flex-grow text-sm">
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'Bihar Board 10th/12th Result Check')">
-                            <span class="font-medium text-slate-700 hover:text-red-600">Bihar Board 10th / 12th Result</span>
-                            <span class="bg-red-100 text-red-600 text-[10px] font-bold px-2 py-0.5 rounded">NEW</span>
-                        </li>
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'SSC GD Constable Result')">
-                            <span class="font-medium text-slate-700 hover:text-red-600">SSC GD Constable Result</span>
-                            <span class="text-xs text-slate-400">Declared</span>
-                        </li>
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'Railway RRB NTPC Result')">
-                            <span class="font-medium text-slate-700 hover:text-red-600">Railway RRB NTPC Scorecard</span>
-                            <span class="text-xs text-slate-400">Active</span>
-                        </li>
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'Bihar Police Constable Result')">
-                            <span class="font-medium text-slate-700 hover:text-red-600">Bihar Police Constable Merit List</span>
-                            <span class="text-xs text-slate-400">Check Now</span>
-                        </li>
+                    <ul id="resultsContainer" class="divide-y divide-slate-100 flex-grow text-sm">
+                        <!-- Dynamically Rendered via POSTS_DATA -->
                     </ul>
                 </div>
 
@@ -202,23 +190,8 @@
                     <div class="bg-blue-600 text-white p-3 font-bold text-center text-lg flex items-center justify-center">
                         <i class="fa-solid fa-address-card mr-2"></i> ADMIT CARD
                     </div>
-                    <ul class="divide-y divide-slate-100 flex-grow text-sm">
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'Railway RRB Admit Card')">
-                            <span class="font-medium text-slate-700 hover:text-blue-600">Railway Technician Admit Card</span>
-                            <span class="bg-blue-100 text-blue-600 text-[10px] font-bold px-2 py-0.5 rounded">LINK OUT</span>
-                        </li>
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'SSC CGL Tier-1 Admit Card')">
-                            <span class="font-medium text-slate-700 hover:text-blue-600">SSC CGL Tier-1 Hall Ticket</span>
-                            <span class="text-xs text-slate-400">Download</span>
-                        </li>
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'NTA NEET / JEE Admit Card')">
-                            <span class="font-medium text-slate-700 hover:text-blue-600">NTA NEET / JEE Main Hall Ticket</span>
-                            <span class="text-xs text-slate-400">Available</span>
-                        </li>
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'Bihar Police SI Admit Card')">
-                            <span class="font-medium text-slate-700 hover:text-blue-600">Bihar Police SI Exam Hall Ticket</span>
-                            <span class="text-xs text-slate-400">Download</span>
-                        </li>
+                    <ul id="admitCardsContainer" class="divide-y divide-slate-100 flex-grow text-sm">
+                        <!-- Dynamically Rendered via POSTS_DATA -->
                     </ul>
                 </div>
 
@@ -227,36 +200,20 @@
                     <div class="bg-emerald-600 text-white p-3 font-bold text-center text-lg flex items-center justify-center">
                         <i class="fa-solid fa-briefcase mr-2"></i> LATEST JOBS
                     </div>
-                    <ul class="divide-y divide-slate-100 flex-grow text-sm">
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'Bihar Police Constable Form')">
-                            <span class="font-medium text-slate-700 hover:text-emerald-600">Bihar Police Constable Online Form</span>
-                            <span class="bg-emerald-100 text-emerald-600 text-[10px] font-bold px-2 py-0.5 rounded">APPLY</span>
-                        </li>
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'SSC GD Constable Form')">
-                            <span class="font-medium text-slate-700 hover:text-emerald-600">SSC GD Constable Recruitment 2026</span>
-                            <span class="text-xs text-slate-400">Active</span>
-                        </li>
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'Indian Army Agniveer Online Form')">
-                            <span class="font-medium text-slate-700 hover:text-emerald-600">Indian Army Agniveer Online Form</span>
-                            <span class="text-xs text-slate-400">Apply Now</span>
-                        </li>
-                        <li class="p-3 hover:bg-slate-50 transition flex justify-between items-center cursor-pointer" onclick="openApplyModal('job', 'Railway RRB Group D Form')">
-                            <span class="font-medium text-slate-700 hover:text-emerald-600">Railway Group D Online Form</span>
-                            <span class="text-xs text-slate-400">Apply Now</span>
-                        </li>
+                    <ul id="latestJobsContainer" class="divide-y divide-slate-100 flex-grow text-sm">
+                        <!-- Dynamically Rendered via POSTS_DATA -->
                     </ul>
                 </div>
 
             </div>
         </section>
 
-        <!-- CERTIFICATE SERVICES SECTION (Bilingual for Certificate Clarity) -->
         <section id="certificates-section" class="scroll-mt-20">
             <h3 class="text-xl font-bold text-slate-800 mb-4 border-l-4 border-amber-500 pl-3">
                 Certificate Services / सरकारी प्रमाण पत्र सेवाएं (RTPS Bihar)
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                
+               
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
                     <div>
                         <div class="w-10 h-10 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center mb-3 text-lg font-bold">
@@ -312,7 +269,6 @@
             </div>
         </section>
 
-        <!-- ID CARDS & AADHAAR SERVICES -->
         <section id="idcards-section" class="scroll-mt-20">
             <h3 class="text-xl font-bold text-slate-800 mb-4 border-l-4 border-emerald-500 pl-3">
                 ID Card & Aadhaar Services
@@ -374,7 +330,6 @@
             </div>
         </section>
 
-        <!-- SCHOLARSHIP PORTAL SECTION -->
         <section id="scholarship-section" class="scroll-mt-20">
             <div class="bg-gradient-to-r from-slate-900 to-primary text-white rounded-2xl p-6 md:p-8 shadow-xl">
                 <div class="flex flex-col lg:flex-row justify-between items-center gap-6">
@@ -394,7 +349,6 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-darkNavy text-slate-300 text-xs py-8 px-4 mt-auto">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 pb-6 border-b border-slate-800">
             <div>
@@ -422,10 +376,9 @@
         </div>
     </footer>
 
-    <!-- ================= SEQUENTIAL MULTI-STEP FORM MODAL ================= -->
     <div id="applyModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl my-8 overflow-hidden flex flex-col max-h-[90vh]">
-            
+           
             <div class="bg-primary text-white p-4 flex justify-between items-center shrink-0">
                 <div>
                     <h3 id="modalTitle" class="font-bold text-lg">Online Service Application</h3>
@@ -443,7 +396,7 @@
                     <span id="modalNoticeText">Please fill in all required fields.</span>
                     <button type="button" onclick="hideNotice()" class="text-red-500 font-bold ml-2">✕</button>
                 </div>
-                
+               
                 <!-- Sequential Step Indicator -->
                 <div class="flex items-center justify-between text-xs font-semibold text-slate-500 border-b border-slate-200 pb-3">
                     <span id="stepBadge1" class="text-primary font-bold border-b-2 border-primary pb-1">1. Fill Details</span>
@@ -467,6 +420,8 @@
                                 <option value="income">Income Certificate / आय प्रमाण पत्र (RTPS)</option>
                                 <option value="pan">New PAN Card or Correction / नया पैन कार्ड या सुधार</option>
                                 <option value="voter">Voter ID Card / मतदाता पहचान पत्र (Form 6/8)</option>
+                                <option value="aadhaar">Aadhaar Services / आधार सुधार व प्रिंट</option>
+                                <option value="ayushman">Ayushman / E-Shram Card / आयुष्मान कार्ड</option>
                                 <option value="scholarship">Scholarship Application / छात्रवृत्ति आवेदन फॉर्म</option>
                                 <option value="job">Sarkari Job / Admit Card Form / सरकारी नौकरी एवं एडमिट कार्ड</option>
                                 <option value="other_cert">Other Digital Service / अन्य डिजिटल सेवा</option>
@@ -537,7 +492,6 @@
 
                         <div id="dynamicServiceFields" class="border-t border-slate-200 pt-3"></div>
 
-                        <!-- Submit / Next Button ONLY IN ENGLISH -->
                         <button type="button" onclick="validateStep1AndNext()" class="w-full bg-primary hover:bg-secondary text-white font-bold py-2.5 rounded-lg text-xs mt-4 transition">
                             Next: Upload Documents →
                         </button>
@@ -546,32 +500,31 @@
                     <!-- STEP 2: Document Upload -->
                     <div id="step2" class="space-y-4 hidden">
                         <div class="bg-amber-50 border border-amber-200 text-amber-800 text-xs p-3 rounded-lg">
-                            <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Upload Passport Photo, Signature, Aadhaar Card and Supporting Documents.
+                            <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Upload Passport Photo, Signature, Identification Card and Supporting Documents.
                         </div>
 
                         <div class="space-y-3">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Applicant Photo / फोटो (JPG) *</label>
-                                <input type="file" id="docPhoto" accept=".jpg,.jpeg" class="w-full text-xs border border-slate-300 rounded-lg p-1.5" required>
+                                <input type="file" id="docPhoto" accept=".jpg,.jpeg,.png" class="w-full text-xs border border-slate-300 rounded-lg p-1.5" required>
                             </div>
 
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1">Applicant Signature / हस्ताक्षर या अंगूठा (JPG) *</label>
-                                <input type="file" id="docSign" accept=".jpg,.jpeg" class="w-full text-xs border border-slate-300 rounded-lg p-1.5" required>
+                                <input type="file" id="docSign" accept=".jpg,.jpeg,.png" class="w-full text-xs border border-slate-300 rounded-lg p-1.5" required>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Aadhaar Card / आधार कार्ड (PDF / JPG) *</label>
-                                <input type="file" id="docAadhaar" accept=".pdf,.jpg,.jpeg" class="w-full text-xs border border-slate-300 rounded-lg p-1.5" required>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Identification Card / पहचान पत्र (PDF / JPG) *</label>
+                                <input type="file" id="docAadhaar" accept=".pdf,.jpg,.jpeg,.png" class="w-full text-xs border border-slate-300 rounded-lg p-1.5" required>
                             </div>
 
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 mb-1" id="dynamicDocLabel">Supporting Document / सहायक दस्तावेज *</label>
-                                <input type="file" id="docSupporting" accept=".pdf,.jpg,.jpeg" class="w-full text-xs border border-slate-300 rounded-lg p-1.5" required>
+                                <input type="file" id="docSupporting" accept=".pdf,.jpg,.jpeg,.png" class="w-full text-xs border border-slate-300 rounded-lg p-1.5" required>
                             </div>
                         </div>
 
-                        <!-- Navigation Buttons ONLY IN ENGLISH -->
                         <div class="flex gap-2 pt-4">
                             <button type="button" onclick="goToStep(1)" class="w-1/3 bg-slate-200 text-slate-700 font-bold py-2.5 rounded-lg text-xs transition">
                                 ← Back
@@ -584,7 +537,7 @@
 
                     <!-- STEP 3: Auto Calculation & Dynamic Payment Redirect -->
                     <div id="step3" class="space-y-4 hidden">
-                        
+                       
                         <!-- Auto Dynamic Billing Box -->
                         <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-2 text-xs">
                             <h4 class="font-bold text-slate-800 text-sm border-b border-slate-200 pb-2">Automatic Bill Breakdown</h4>
@@ -623,16 +576,13 @@
                         <!-- Payment Option & Dynamic Gateway Redirection -->
                         <div class="border-t border-slate-200 pt-3 space-y-3">
                             <h4 class="text-xs font-bold text-slate-800">Payment Gateway Redirection & Verification</h4>
-                            
+                           
                             <div class="p-3 border border-emerald-300 rounded-xl bg-emerald-50/50 text-center space-y-2">
                                 <p class="text-[11px] font-semibold text-emerald-800">Scan QR or Click App to Pay directly via UPI</p>
-                                
+                               
                                 <div class="bg-white p-2 rounded-lg inline-block border border-slate-200 shadow-sm">
-                                    <div class="w-32 h-32 bg-slate-900 text-white flex flex-col items-center justify-center p-2 mx-auto rounded">
-                                        <i class="fa-solid fa-qrcode text-5xl text-white mb-1"></i>
-                                        <span class="text-[8px] tracking-tighter">GANESH DIGITAL UPI</span>
-                                    </div>
-                                    <p class="text-[10px] font-bold text-slate-700 mt-1">UPI ID: 8252880028@upi</p>
+                                    <img id="paymentQrImage" src="https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D60%26cu%3DINR&size=200&format=png" alt="Payment QR" class="w-32 h-32 mx-auto rounded object-contain border border-slate-100" />
+                                    <p class="text-[10px] font-bold text-slate-700 mt-1">UPI ID: 8252880028@jio</p>
                                 </div>
 
                                 <div class="flex justify-center gap-2 pt-1">
@@ -652,7 +602,7 @@
                                 </label>
                                 <p class="text-[10px] text-slate-600">Pay karne ke baad Google Pay / PhonePe se 12-Digit UTR / Ref No. yahan enter karein.</p>
                                 <input type="text" id="paymentUTR" maxlength="20" placeholder="e.g. 423819284712" class="w-full text-xs p-2.5 border border-slate-300 rounded-lg bg-white font-mono uppercase" required>
-                                
+                               
                                 <label class="flex items-center space-x-2 pt-1 cursor-pointer">
                                     <input type="checkbox" id="paymentConfirmCheck" class="rounded text-primary focus:ring-primary h-4 w-4" required>
                                     <span class="text-[11px] font-semibold text-slate-700">I confirm that I have completed the UPI payment for this form. *</span>
@@ -661,9 +611,9 @@
                                 <label class="flex items-start space-x-2 pt-1 cursor-pointer border-t border-emerald-200/60 pt-2">
                                     <input type="checkbox" id="termsCheck" class="rounded text-primary focus:ring-primary h-4 w-4 mt-0.5" required>
                                     <span class="text-[11px] text-slate-700">
-                                        I accept the 
-                                        <button type="button" onclick="openPrivacyModal()" class="text-primary font-bold underline hover:text-secondary">Privacy Policy</button> 
-                                        and 
+                                        I accept the
+                                        <button type="button" onclick="openPrivacyModal()" class="text-primary font-bold underline hover:text-secondary">Privacy Policy</button>
+                                        and
                                         <button type="button" onclick="openTermsModal()" class="text-primary font-bold underline hover:text-secondary">Terms & Conditions</button>
                                         of Ganesh Digital World. *
                                     </span>
@@ -671,12 +621,11 @@
                             </div>
                         </div>
 
-                        <!-- Final Form Submission Button ONLY IN ENGLISH -->
                         <div class="flex gap-2 pt-2">
                             <button type="button" onclick="goToStep(2)" class="w-1/3 bg-slate-200 text-slate-700 font-bold py-2.5 rounded-lg text-xs transition">
                                 ← Back
                             </button>
-                            <button type="submit" class="w-2/3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-lg text-xs transition flex items-center justify-center">
+                            <button type="submit" id="submitBtn" class="w-2/3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-lg text-xs transition flex items-center justify-center">
                                 <i class="fa-solid fa-check-circle mr-1"></i> Submit & Print Receipt
                             </button>
                         </div>
@@ -687,10 +636,9 @@
         </div>
     </div>
 
-    <!-- ================= RECEIPT GENERATION MODAL ================= -->
     <div id="receiptModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 my-8 space-y-4">
-            
+           
             <div id="printableReceipt" class="space-y-4 border border-slate-200 p-4 rounded-xl bg-slate-50">
                 <div class="text-center border-b border-slate-200 pb-3">
                     <h3 class="font-extrabold text-primary text-lg">GANESH DIGITAL WORLD</h3>
@@ -755,7 +703,6 @@
         </div>
     </div>
 
-    <!-- ================= TRACK STATUS MODAL ================= -->
     <div id="trackModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-5 space-y-4">
             <div class="flex justify-between items-center border-b border-slate-200 pb-2">
@@ -764,7 +711,7 @@
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-            
+           
             <div class="space-y-3">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Token ID or Mobile No</label>
@@ -778,7 +725,6 @@
         </div>
     </div>
 
-    <!-- PRIVACY & TERMS MODALS -->
     <div id="privacyModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl p-6 max-w-xl w-full space-y-4 text-xs text-slate-600 max-h-[85vh] overflow-y-auto shadow-2xl">
             <div class="flex justify-between items-center border-b pb-2">
@@ -788,7 +734,7 @@
             <div class="space-y-3 leading-relaxed text-slate-700">
                 <p><strong>Ganesh Digital World</strong> is committed to protecting your personal data and privacy. This policy outlines how we handle data when you use our Online Digital Seva & Cyber Cafe Portal.</p>
                 <h4 class="font-bold text-slate-900 border-l-2 border-primary pl-2">1. Data Collection & Document Safety</h4>
-                <p>We collect essential information such as Full Name, Father's/Mother's Name, Contact Number, Aadhaar Number, Photograph, Signature, and Supporting Documents strictly required for processing official Government forms (RTPS Bihar, SSC, Railway, PAN, Voter ID, Scholarship, etc.).</p>
+                <p>We collect essential information such as Full Name, Father's/Mother's Name, Contact Number, Identification Details, Photograph, Signature, and Supporting Documents strictly required for processing official Government forms (RTPS Bihar, SSC, Railway, PAN, Voter ID, Scholarship, etc.).</p>
                 <h4 class="font-bold text-slate-900 border-l-2 border-primary pl-2">2. Strict No Third-Party Sharing</h4>
                 <p>Your uploaded documents and personal details are strictly confidential. We NEVER sell, share, or transfer your personal data to any unauthorized third party or marketing entity.</p>
                 <h4 class="font-bold text-slate-900 border-l-2 border-primary pl-2">3. Data Usage Purpose</h4>
@@ -825,22 +771,25 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT & VALIDATION LOGIC -->
-    <script>
-        const servicePricing = {
-            residence: { govt: 0, process: 20, service: 40, total: 60, title: "Residence Certificate / निवास प्रमाण पत्र", docLabel: "Land Receipt / Old Residence Cert (रसीद या पुराना निवास)" },
-            caste: { govt: 0, process: 20, service: 40, total: 60, title: "Caste Certificate / जाति प्रमाण पत्र", docLabel: "Khatian / Land Receipt / Old Caste Cert (खतियान या रसीद)" },
-            income: { govt: 0, process: 20, service: 40, total: 60, title: "Income Certificate / आय प्रमाण पत्र", docLabel: "Salary Slip / Land Receipt / Declaration (आय शपथ पत्र)" },
-            pan: { govt: 107, process: 20, service: 50, total: 177, title: "New PAN Card / Correction (पैन कार्ड)", docLabel: "DOB Proof / 10th Marksheet (जन्म प्रमाण पत्र या मार्कशीट)" },
-            voter: { govt: 0, process: 25, service: 35, total: 60, title: "Voter ID Card / मतदाता पहचान पत्र (Form 6/8)", docLabel: "Address Proof / Electricity Bill / Passbook (बिजली बिल या पासबुक)" },
-            scholarship: { govt: 0, process: 30, service: 70, total: 100, title: "Scholarship Form / छात्रवृत्ति आवेदन", docLabel: "Last Passed Marksheet & Fee Receipt (मार्कशीट व रसीद)" },
-            job: { govt: 100, process: 20, service: 60, total: 180, title: "Sarkari Job / Admit Card Form", docLabel: "Qualification Marksheet / Certificate (योग्यता प्रमाण पत्र)" },
-            other_cert: { govt: 0, process: 20, service: 40, total: 60, title: "Other Digital Service / अन्य डिजिटल सेवा", docLabel: "Relevant Supporting Document (संबंधित दस्तावेज)" }
-        };
+    <!-- External Posts Data File Integration -->
+    <script src="posts.js"></script>
 
+    <!-- Modal & Application Logic Script -->
+    <script>
         let currentStep = 1;
         let activeModal = null;
         let currentGeneratedCaptcha = "";
+        let isSubmitting = false; // Lock to prevent multi-submissions
+
+        // Telegram Bot Credentials
+        const TELEGRAM_BOT_TOKEN = "8992840881:AAGIG28aWGSc0TfN3DDTNXKpHutX8MQ3Pn0";
+        const TELEGRAM_CHAT_ID = "985390982";
+
+        window.onload = function() {
+            if(typeof renderPosts === 'function') {
+                renderPosts();
+            }
+        };
 
         function showNotice(msg) {
             const noticeBox = document.getElementById('modalNotice');
@@ -877,7 +826,9 @@
             if(serviceKey) {
                 document.getElementById('serviceSelect').value = serviceKey;
             }
-            updateServiceDynamicFields(customJobTitle);
+            if(typeof updateServiceDynamicFields === 'function') {
+                updateServiceDynamicFields(customJobTitle);
+            }
             goToStep(1, false);
             generateCaptcha();
             pushModalState('applyModal');
@@ -970,7 +921,7 @@
             const supporting = document.getElementById('docSupporting').files.length;
 
             if (photo === 0 || sign === 0 || aadhaar === 0 || supporting === 0) {
-                showNotice("Please upload all 4 required documents (Photo, Signature, Aadhaar Card, Supporting Document) before proceeding!");
+                showNotice("Please upload all 4 required documents (Photo, Signature, Identification Card, Supporting Document) before proceeding!");
                 return;
             }
 
@@ -998,46 +949,14 @@
             } else if(stepNum === 3) {
                 document.getElementById('step3').classList.remove('hidden');
                 document.getElementById('stepBadge3').className = "text-primary font-bold border-b-2 border-primary pb-1";
-                updateBillAndPaymentLinks();
+                if(typeof updateBillAndPaymentLinks === 'function') {
+                    updateBillAndPaymentLinks();
+                }
             }
 
             if(pushState) {
                 pushModalState('applyModal');
             }
-        }
-
-        function updateServiceDynamicFields(customTitle = "") {
-            const selectedKey = document.getElementById('serviceSelect').value;
-            const container = document.getElementById('dynamicServiceFields');
-            const docLabel = document.getElementById('dynamicDocLabel');
-            const conf = servicePricing[selectedKey] || servicePricing['residence'];
-
-            docLabel.innerText = conf.docLabel + " *";
-
-            let html = "";
-            if(selectedKey === 'caste') {
-                html = `<div class="grid grid-cols-2 gap-2 mt-2">
-                            <div><label class="block text-[11px] text-slate-600">Category / वर्ग *</label><select class="w-full text-xs p-2 border rounded"><option>BC-1 (EBC) / अत्यंत पिछड़ा</option><option>BC-2 (OBC) / पिछड़ा वर्ग</option><option>SC / अनुसूचित जाति</option><option>ST / अनुसूचित जनजाति</option></select></div>
-                            <div><label class="block text-[11px] text-slate-600">Caste Name / जाति का नाम *</label><input type="text" placeholder="e.g. Gond (गोंड)" class="w-full text-xs p-2 border rounded"></div>
-                        </div>`;
-            } else if(selectedKey === 'pan') {
-                html = `<div class="mt-2"><label class="block text-[11px] text-slate-600">Date of Birth (DOB) / जन्म तिथि *</label><input type="date" class="w-full text-xs p-2 border rounded"></div>`;
-            }
-            container.innerHTML = html;
-        }
-
-        function updateBillAndPaymentLinks() {
-            const key = document.getElementById('serviceSelect').value;
-            const conf = servicePricing[key] || servicePricing['residence'];
-
-            document.getElementById('billGovtFee').innerText = `₹${conf.govt}`;
-            document.getElementById('billProcessFee').innerText = `₹${conf.process}`;
-            document.getElementById('billServiceCharge').innerText = `₹${conf.service}`;
-            document.getElementById('billTotalAmount').innerText = `₹${conf.total}`;
-
-            const upiString = `upi://pay?pa=8252880028@upi&pn=GaneshDigitalWorld&am=${conf.total}&cu=INR`;
-            document.getElementById('gpayBtn').href = upiString;
-            document.getElementById('phonepeBtn').href = upiString;
         }
 
         function generateCaptcha() {
@@ -1051,8 +970,102 @@
             document.getElementById('captchaInput').value = "";
         }
 
-        function handleFormSubmit(e) {
+        // Automatic Client-Side Image Compression Helper (Canvas API)
+        function compressFile(file) {
+            return new Promise((resolve) => {
+                if (!file) return resolve(null);
+                if (file.type === 'application/pdf') return resolve(file);
+
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        const maxDim = 1200;
+
+                        if (width > height && width > maxDim) {
+                            height = Math.round((height * maxDim) / width);
+                            width = maxDim;
+                        } else if (height > maxDim) {
+                            width = Math.round((width * maxDim) / height);
+                            height = maxDim;
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        canvas.toBlob((blob) => {
+                            if (blob) {
+                                const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+                                    type: 'image/jpeg',
+                                    lastModified: Date.now()
+                                });
+                                resolve(compressedFile);
+                            } else {
+                                resolve(file);
+                            }
+                        }, 'image/jpeg', 0.7);
+                    };
+                    img.onerror = () => resolve(file);
+                };
+                reader.onerror = () => resolve(file);
+            });
+        }
+
+        // Send Text Message to Telegram
+        async function sendTelegramMessage(text) {
+            try {
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: text,
+                        parse_mode: 'HTML'
+                    })
+                });
+            } catch (e) {
+                console.error("Telegram Text Error: ", e);
+            }
+        }
+
+        // Send Document/Photo to Telegram
+        async function sendTelegramFile(file, caption) {
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('chat_id', TELEGRAM_CHAT_ID);
+            formData.append('caption', caption);
+           
+            let endpoint = 'sendDocument';
+            if (file.type.startsWith('image/')) {
+                endpoint = 'sendPhoto';
+                formData.append('photo', file);
+            } else {
+                formData.append('document', file);
+            }
+
+            try {
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/${endpoint}`, {
+                    method: 'POST',
+                    body: formData
+                });
+            } catch (e) {
+                console.error("Telegram File Error: ", e);
+            }
+        }
+
+        async function handleFormSubmit(e) {
             e.preventDefault();
+           
+            // Prevent multiple submissions
+            if (isSubmitting) return;
+
             hideNotice();
 
             // Validate Captcha
@@ -1078,31 +1091,138 @@
                 return;
             }
 
-            const name = document.getElementById('applicantName').value;
-            const gender = document.getElementById('applicantGender').value;
-            const mobile = document.getElementById('mobileNumber').value;
-            const subDiv = document.getElementById('subDivision').value;
-            const key = document.getElementById('serviceSelect').value;
-            const conf = servicePricing[key] || servicePricing['residence'];
+            // Start Submission Lock & Show Loading Overlay
+            isSubmitting = true;
+            const submitBtn = document.getElementById('submitBtn');
+            if(submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+            document.getElementById('loadingOverlay').classList.remove('hidden');
 
-            const randomToken = "GDW-2026-" + Math.floor(1000 + Math.random() * 9000);
-            const currentDate = new Date().toLocaleDateString('en-GB');
+            try {
+                const name = document.getElementById('applicantName').value;
+                const gender = document.getElementById('applicantGender').value;
+                const father = document.getElementById('fatherName').value;
+                const mother = document.getElementById('motherName').value;
+                const mobile = document.getElementById('mobileNumber').value;
+                const district = document.getElementById('district').value;
+                const subDiv = document.getElementById('subDivision').value;
+                const block = document.getElementById('block').value;
+                const panchayat = document.getElementById('panchayat').value;
+                const village = document.getElementById('village').value;
+                const postWard = document.getElementById('postWard').value;
+                const key = document.getElementById('serviceSelect').value;
+                const conf = (typeof servicePricing !== 'undefined' && servicePricing[key]) ? servicePricing[key] : { title: 'Digital Service', total: '60' };
 
-            document.getElementById('recToken').innerText = randomToken;
-            document.getElementById('recDate').innerText = currentDate;
-            document.getElementById('recService').innerText = conf.title;
-            document.getElementById('recName').innerText = name;
-            document.getElementById('recGender').innerText = gender;
-            document.getElementById('recSubDiv').innerText = subDiv;
-            document.getElementById('recMobile').innerText = mobile;
-            document.getElementById('recPaid').innerText = `₹${conf.total}`;
-            document.getElementById('recUTR').innerText = utr;
+                const randomToken = "GDW-2026-" + Math.floor(1000 + Math.random() * 9000);
+                const currentDate = new Date().toLocaleDateString('en-GB');
 
-            const waText = encodeURIComponent(`Hello Ganesh Digital World,\nNew Application Form Submitted:\n- Token: ${randomToken}\n- Name: ${name}\n- Gender: ${gender}\n- Sub-Division: ${subDiv}\n- Service: ${conf.title}\n- Mobile: ${mobile}\n- Total Fee: ₹${conf.total}\n- Payment UTR: ${utr}`);
-            document.getElementById('whatsappSendBtn').href = `https://wa.me/918252880028?text=${waText}`;
+                // Collect Files & Auto Compress Images
+                const photoRaw = document.getElementById('docPhoto').files[0];
+                const signRaw = document.getElementById('docSign').files[0];
+                const aadhaarRaw = document.getElementById('docAadhaar').files[0];
+                const supportingRaw = document.getElementById('docSupporting').files[0];
 
-            closeApplyModal(false);
-            document.getElementById('receiptModal').classList.remove('hidden');
+                const [photoFile, signFile, aadhaarFile, supportingFile] = await Promise.all([
+                    compressFile(photoRaw),
+                    compressFile(signRaw),
+                    compressFile(aadhaarRaw),
+                    compressFile(supportingRaw)
+                ]);
+
+                // Construct Binary FormData for Backend API
+                const sendData = new FormData();
+                sendData.append('token', randomToken);
+                sendData.append('date', currentDate);
+                sendData.append('service', conf.title);
+                sendData.append('name', name);
+                sendData.append('gender', gender);
+                sendData.append('father', father);
+                sendData.append('mother', mother);
+                sendData.append('mobile', mobile);
+                sendData.append('district', district);
+                sendData.append('subDiv', subDiv);
+                sendData.append('block', block);
+                sendData.append('panchayat', panchayat);
+                sendData.append('village', village);
+                sendData.append('postWard', postWard);
+                sendData.append('total', conf.total);
+                sendData.append('utr', utr);
+
+                if (photoFile) sendData.append('photo', photoFile);
+                if (signFile) sendData.append('sign', signFile);
+                if (aadhaarFile) sendData.append('aadhaar', aadhaarFile);
+                if (supportingFile) sendData.append('supporting', supportingFile);
+
+                // Optional Server Endpoint Call
+                fetch('/api/order', {
+                    method: 'POST',
+                    body: sendData
+                }).catch(err => console.error("Error sending order data:", err));
+
+                // Telegram Realtime Multi-Step Delivery
+                const telegramText = `<b>🚨 NEW APPLICATION SUBMITTED 🚨</b>\n\n` +
+                    `<b>🎫 Token ID:</b> ${randomToken}\n` +
+                    `<b>📅 Date:</b> ${currentDate}\n` +
+                    `<b>📌 Service:</b> ${conf.title}\n\n` +
+                    `<b>👤 Applicant Details:</b>\n` +
+                    `• <b>Name:</b> ${name}\n` +
+                    `• <b>Gender:</b> ${gender}\n` +
+                    `• <b>Father:</b> ${father}\n` +
+                    `• <b>Mother:</b> ${mother}\n` +
+                    `• <b>Mobile:</b> ${mobile}\n\n` +
+                    `<b>📍 Address Details:</b>\n` +
+                    `• <b>District:</b> ${district}\n` +
+                    `• <b>Sub-Division:</b> ${subDiv}\n` +
+                    `• <b>Block:</b> ${block}\n` +
+                    `• <b>Panchayat:</b> ${panchayat}\n` +
+                    `• <b>Village:</b> ${village}\n` +
+                    `• <b>Post & Ward:</b> ${postWard}\n\n` +
+                    `<b>💰 Payment Status:</b>\n` +
+                    `• <b>Total Fee:</b> ₹${conf.total}\n` +
+                    `• <b>UPI UTR / Ref ID:</b> <code>${utr}</code>`;
+
+                // 1. Send Text Details to Telegram
+                await sendTelegramMessage(telegramText);
+
+                // 2. Upload All Documents to Telegram Sequentially
+                if (photoFile) await sendTelegramFile(photoFile, `📷 Photo - ${name} (${randomToken})`);
+                if (signFile) await sendTelegramFile(signFile, `✍️ Signature - ${name} (${randomToken})`);
+                if (aadhaarFile) await sendTelegramFile(aadhaarFile, `🆔 ID Card - ${name} (${randomToken})`);
+                if (supportingFile) await sendTelegramFile(supportingFile, `📄 Supporting Doc - ${name} (${randomToken})`);
+
+                // Update Receipt Fields
+                document.getElementById('recToken').innerText = randomToken;
+                document.getElementById('recDate').innerText = currentDate;
+                document.getElementById('recService').innerText = conf.title;
+                document.getElementById('recName').innerText = name;
+                document.getElementById('recGender').innerText = gender;
+                document.getElementById('recSubDiv').innerText = subDiv;
+                document.getElementById('recMobile').innerText = mobile;
+                document.getElementById('recPaid').innerText = `₹${conf.total}`;
+                document.getElementById('recUTR').innerText = utr;
+
+                const waText = encodeURIComponent(`Hello Ganesh Digital World,\nNew Application Form Submitted:\n- Token: ${randomToken}\n- Name: ${name}\n- Gender: ${gender}\n- Sub-Division: ${subDiv}\n- Service: ${conf.title}\n- Mobile: ${mobile}\n- Total Fee: ₹${conf.total}\n- Payment UTR: ${utr}`);
+                document.getElementById('whatsappSendBtn').href = `https://wa.me/918252880028?text=${waText}`;
+
+                // Hide Loading Screen & Open Receipt Modal
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                closeApplyModal(false);
+                document.getElementById('receiptModal').classList.remove('hidden');
+
+            } catch (error) {
+                console.error("Submission Error: ", error);
+                showNotice("Upload failed due to network issue. Please try submitting again.");
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            } finally {
+                // Unlock Submissions
+                isSubmitting = false;
+                if(submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            }
         }
 
         function searchStatus() {
