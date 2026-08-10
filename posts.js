@@ -81,12 +81,6 @@ const servicePricing = {
         docLabel: "Last Passed Marksheet & Fee Receipt (मार्कशीट व रसीद)",
         qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D100%26cu%3DINR&size=200&format=png"
     },
-    job: {
-        govt: 100, service: 60, total: 160,
-        title: "Sarkari Job / Admit Card Form",
-        docLabel: "Qualification Marksheet / Certificate (योग्यता प्रमाण पत्र)",
-        qrImage: "https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3D8252880028%2540jio%26pn%3DGanesh%2520Digital%2520world%26am%3D160%26cu%3DINR&size=200&format=png"
-    },
     other_cert: {
         govt: 0, service: 60, total: 60,
         title: "Other Digital Service / अन्य डिजिटल सेवा",
